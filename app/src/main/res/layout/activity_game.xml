@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Game">
+
+    <TextView
+        android:id="@+id/speler1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:text="value1"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/speler2"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginBottom="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="value2"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/pitjesbak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/pitjesbak" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/dice_1" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="10dp"
+            app:srcCompat="@drawable/dice_4" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/dice_3" />
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/rollDices"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="Roll dice"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:id="@+id/apen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 apen"
+            android:textSize="10sp"/>
+
+        <Button
+            android:id="@+id/soixante_neuf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Soixante-neuf"
+            android:textSize="10sp"/>
+
+        <Button
+            android:id="@+id/zand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zand"
+            android:textSize="10sp"/>
+
+        <Button
+            android:id="@+id/zeven"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zeven"
+            android:textSize="10sp"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
