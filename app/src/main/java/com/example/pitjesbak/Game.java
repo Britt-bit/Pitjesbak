@@ -1,19 +1,23 @@
 package com.example.pitjesbak;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
-
+import java.util.ArrayList;
 import java.util.Random;
 
-public class Game extends AppCompatActivity {
+public class Game extends AppCompatActivity implements View.OnClickListener
+{
 
     String one, two;
     TextView speler1;
@@ -29,85 +33,255 @@ public class Game extends AppCompatActivity {
     boolean stop2;
     boolean stop3;
 
+    int value1;
+    int value2;
+    int value3;
+
+
+
+   // private boolean player1Turn = true;
+    private int roundCount;
+    private int player1Points;
+    private int player2Points;
+    TextView scorePlayer1, scorePlayer2;
+
+    int score1 = 7, score2 = 7;
+
+
+
+   // Integer uitkomst2[] = new Integer[3];
+
+    ArrayList<Integer> uitkomst1 = new ArrayList<>();
+    ArrayList<Integer> uitkomst2 = new ArrayList<>();
+
+    int uitkomst1som = 0;
+    int uitkomst2som = 0;
+
+
+
+    private TextView[] speler = new TextView[2];
+
+    //   private TextView[] hidden = new TextView[3];
+
 
     public static final Random RANDOM = new Random();
     private Button rollDices;
-    private ImageView imageButton1, imageButton2, imageButton3;
+    private Button finish;
+    int counter = 0;
+    private ImageView button_0, button_1, button_2;
+    TextView hidden1, hidden2, hidden3;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        finish = findViewById(R.id.finish);
+        scorePlayer1 = findViewById(R.id.scorePlayer1);
+        scorePlayer2 = findViewById(R.id.scorePlayer2);
+
 
 
         rollDices = findViewById(R.id.rollDices);
-        imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
-        imageButton2 = (ImageButton) findViewById(R.id.imageButton2);
-        imageButton3 = (ImageButton) findViewById(R.id.imageButton3);
+            button_0 = (ImageButton) findViewById(R.id.button_0);
+            button_0.setOnClickListener(this);
+            button_1 = (ImageButton) findViewById(R.id.button_1);
+            button_1.setOnClickListener(this);
+            button_2 = (ImageButton) findViewById(R.id.button_2);
+            button_2.setOnClickListener(this);
+
+            hidden1 =  findViewById(R.id.hidden1);
+            hidden2 = findViewById(R.id.hidden2);
+            hidden3 = findViewById(R.id.hidden3);
         //array van maken?
+
+
+        Toast.makeText(getApplicationContext(), "speler 1 is aan de beurt", Toast.LENGTH_SHORT).show();
+
 
         rollDices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                int value1 = randomDiceValue();
-                int value2 = randomDiceValue();
-                int value3 = randomDiceValue();
 
-                if(stop1 == false){
-                    int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.pitjesbak");
-                    imageButton1.setImageResource(res1);
-                }
 
-                if(stop2 == false){
-                    int res2 = getResources().getIdentifier("dice_" + value2, "drawable", "com.example.pitjesbak");
-                    imageButton2.setImageResource(res2);
-                }
+                    if (!stop1) {
+                        value1 = randomDiceValue();
+                        int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.pitjesbak");
+                        button_0.setImageResource(res1);
+                    }
 
-                if(stop3 == false){
-                    int res3 = getResources().getIdentifier("dice_" + value3, "drawable", "com.example.pitjesbak");
-                    imageButton3.setImageResource(res3);
-                }
+                    if (!stop2) {
+                        value2 = randomDiceValue();
+                        int res2 = getResources().getIdentifier("dice_" + value2, "drawable", "com.example.pitjesbak");
+                        button_1.setImageResource(res2);
+                    }
+
+                    if (!stop3) {
+                        value3 = randomDiceValue();
+                        int res3 = getResources().getIdentifier("dice_" + value3, "drawable", "com.example.pitjesbak");
+                        button_2.setImageResource(res3);
+                    }
+
+
+
+
+
+                counter++;
+
+                    if (counter == 0){
+                        value1 = 1;
+                        value2 = 4;
+                        value3 = 2;
+                    } else if (counter == 3){
+                        stop1 = false;
+                        stop2 = false;
+                        stop3 = false;
+                        hidden1.setVisibility(View.INVISIBLE);
+                        hidden2.setVisibility(View.INVISIBLE);
+                        hidden3.setVisibility(View.INVISIBLE);
+
+                        Toast.makeText(getApplicationContext(), "speler 2 is aan de beurt", Toast.LENGTH_SHORT).show();
+
+                        uitkomst1.add(value1);
+                        uitkomst1.add(value2);
+                        uitkomst1.add(value3);
+
+                        for (int i = 0; i < 3; i++){
+                            uitkomst1som += uitkomst1.get(i);
+                        }
+
+                       Toast.makeText(getApplicationContext(), "punten " + uitkomst1som, Toast.LENGTH_SHORT).show();
+
+
+
+                    } else if (counter == 6){
+                        stop1 = false;
+                        stop2 = false;
+                        stop3 = false;
+                        hidden1.setVisibility(View.INVISIBLE);
+                        hidden2.setVisibility(View.INVISIBLE);
+                        hidden3.setVisibility(View.INVISIBLE);
+
+                        Toast.makeText(getApplicationContext(), "speler 1 is aan de beurt", Toast.LENGTH_SHORT).show();
+                        counter = 0;
+
+                        uitkomst2.add(value1);
+                        uitkomst2.add(value2);
+                        uitkomst2.add(value3);
+
+                        for (int i = 0; i < 3; i++){
+                            uitkomst2som += uitkomst2.get(i);
+                        }
+
+                        Toast.makeText(getApplicationContext(), "punten " + uitkomst2som, Toast.LENGTH_SHORT).show();
+
+
+
+                       if (uitkomst1som < uitkomst2som) {
+                           score2--;
+                           scorePlayer2.setText(String.valueOf(score2));
+
+
+                           uitkomst1som = 0;
+                           uitkomst1.clear();
+                           uitkomst2som = 0;
+                           uitkomst2.clear();
+
+                       } else if (uitkomst1som > uitkomst2som) {
+                           score1--;
+                           scorePlayer1.setText(String.valueOf(score1));
+                           uitkomst1som = 0;
+                           uitkomst1.clear();
+                           uitkomst2som = 0;
+                           uitkomst2.clear();
+                       } else {
+                           Toast.makeText(getApplicationContext(), "It's a draw", Toast.LENGTH_SHORT).show();
+                           uitkomst1som = 0;
+                           uitkomst1.clear();
+                           uitkomst2som = 0;
+                           uitkomst2.clear();
+                       }
+                    }
+            }
+
+            public int randomDiceValue() {
+                return RANDOM.nextInt(6) + 1;
             }
         });
 
+  //      finish.setOnClickListener(new View.OnClickListener() {
+  //          @Override
+  //          public void onClick(View view) {
+  //              if (stop1 && stop2 && stop3){
+  //                  stop1 = false;
+  //                  stop2 = false;
+  //                  stop3 = false;
+  //                  hidden1.setVisibility(View.INVISIBLE);
+  //                  hidden2.setVisibility(View.INVISIBLE);
+  //                  hidden3.setVisibility(View.INVISIBLE);
+  //                  Toast.makeText(getApplicationContext(), "de stop buttons werken", Toast.LENGTH_SHORT).show();
+
+//                    counter = 0;
+//                } else {
+//                    Toast.makeText(getApplicationContext(), "de stop buttons werken nie zo goe", Toast.LENGTH_SHORT).show();
+//                }
+  //          }
+  //      });
 
 
+        //stop button met rolling
 
-        imageButton1.setOnClickListener(new View.OnClickListener(){
+        button_0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (stop1==false){
+                if (!stop1) {
                     stop1 = true;
-                }else{
-                    stop1 =false;
+                    hidden1.setVisibility(View.VISIBLE);
+                } else {
+                    stop1 = false;
+                    hidden1.setVisibility(View.INVISIBLE);
                 }
             }
         });
 
 
-        imageButton2.setOnClickListener(new View.OnClickListener(){
+
+        button_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (stop2==false){
+                if (!stop2) {
                     stop2 = true;
-                }else{
-                    stop2 =false;
+                    hidden2.setVisibility(View.VISIBLE);
+                } else {
+                    stop2 = false;
+                    hidden2.setVisibility(View.INVISIBLE);
                 }
+
             }
         });
 
 
-        imageButton3.setOnClickListener(new View.OnClickListener(){
+        button_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (stop3==false){
+                if (!stop3) {
                     stop3 = true;
-                }else{
-                    stop3 =false;
+                    hidden3.setVisibility(View.VISIBLE);
+
+                } else {
+                    stop3 = false;
+                    hidden3.setVisibility(View.INVISIBLE);
+
                 }
             }
         });
+
+
+
+
+
+
 
 
         //get text from main to here
@@ -121,6 +295,33 @@ public class Game extends AppCompatActivity {
         speler2.setText(two);
 
 
+
+
+
+        //wie speelt er???
+
+
+
+     //   speler1.setBackgroundResource(R.drawable.textview_border);
+     //   speler2.setBackgroundResource(R.drawable.textview_border);
+
+     //   final ShapeDrawable shape = new ShapeDrawable(new RectShape());
+     //   shape.getPaint().setColor(Color.BLUE);
+     //   shape.getPaint().setStyle(Paint.Style.STROKE);
+     //   shape.getPaint().setStrokeWidth(5);
+
+     //   final ShapeDrawable shapeNone = new ShapeDrawable(new RectShape());
+     //   shapeNone.getPaint().setColor(Color.WHITE);
+     //   shapeNone.getPaint().setStyle(Paint.Style.STROKE);
+     //   shapeNone.getPaint().setStrokeWidth(5);
+
+     //   speler1.setBackground(shape);
+     //   speler2.setBackground(shapeNone);
+
+
+
+
+
         //dobbel hulp buttons
 
         soixante_neuf = findViewById(R.id.soixante_neuf);
@@ -128,12 +329,13 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                int res1 = getResources().getIdentifier("dice_6", "drawable", "com.example.pitjesbak");
-                int res2 = getResources().getIdentifier("dice_5", "drawable", "com.example.pitjesbak");
-                int res3 = getResources().getIdentifier("dice_4", "drawable", "com.example.pitjesbak");
-                imageButton1.setImageResource(res1);
-                imageButton2.setImageResource(res2);
-                imageButton3.setImageResource(res3);
+
+                    int res1 = getResources().getIdentifier("dice_6", "drawable", "com.example.pitjesbak");
+                    int res2 = getResources().getIdentifier("dice_5", "drawable", "com.example.pitjesbak");
+                    int res3 = getResources().getIdentifier("dice_4", "drawable", "com.example.pitjesbak");
+                    button_0.setImageResource(res1);
+                    button_1.setImageResource(res2);
+                    button_2.setImageResource(res3);
             }
         });
 
@@ -143,12 +345,12 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                int res1 = getResources().getIdentifier("dice_1", "drawable", "com.example.pitjesbak");
-                int res2 = getResources().getIdentifier("dice_1", "drawable", "com.example.pitjesbak");
-                int res3 = getResources().getIdentifier("dice_1", "drawable", "com.example.pitjesbak");
-                imageButton1.setImageResource(res1);
-                imageButton2.setImageResource(res2);
-                imageButton3.setImageResource(res3);
+                    int res1 = getResources().getIdentifier("dice_1", "drawable", "com.example.pitjesbak");
+                    int res2 = getResources().getIdentifier("dice_1", "drawable", "com.example.pitjesbak");
+                    int res3 = getResources().getIdentifier("dice_1", "drawable", "com.example.pitjesbak");
+                    button_0.setImageResource(res1);
+                    button_1.setImageResource(res2);
+                    button_2.setImageResource(res3);
             }
         });
 
@@ -158,12 +360,15 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                int res1 = getResources().getIdentifier("dice_4", "drawable", "com.example.pitjesbak");
-                int res2 = getResources().getIdentifier("dice_4", "drawable", "com.example.pitjesbak");
-                int res3 = getResources().getIdentifier("dice_4", "drawable", "com.example.pitjesbak");
-                imageButton1.setImageResource(res1);
-                imageButton2.setImageResource(res2);
-                imageButton3.setImageResource(res3);
+
+
+                    int res1 = getResources().getIdentifier("dice_4", "drawable", "com.example.pitjesbak");
+                    int res2 = getResources().getIdentifier("dice_4", "drawable", "com.example.pitjesbak");
+                    int res3 = getResources().getIdentifier("dice_4", "drawable", "com.example.pitjesbak");
+                    button_0.setImageResource(res1);
+                    button_1.setImageResource(res2);
+                    button_2.setImageResource(res3);
+
             }
         });
 
@@ -176,67 +381,15 @@ public class Game extends AppCompatActivity {
                 int res1 = getResources().getIdentifier("dice_2", "drawable", "com.example.pitjesbak");
                 int res2 = getResources().getIdentifier("dice_2", "drawable", "com.example.pitjesbak");
                 int res3 = getResources().getIdentifier("dice_3", "drawable", "com.example.pitjesbak");
-                imageButton1.setImageResource(res1);
-                imageButton2.setImageResource(res2);
-                imageButton3.setImageResource(res3);
+                button_0.setImageResource(res1);
+                button_1.setImageResource(res2);
+                button_2.setImageResource(res3);
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-   //     rollDices.setOnClickListener(new View.OnClickListener() {
-   //         public void onClick(View v) {
-   //             if (v == rollDices){
-   //               int value1 = randomDiceValue();
-   //               int res1 = getResources().getIdentifier("dice_" + value1, "drawable", "com.example.pitjesbak");
-   //               imageButton1.setImageResource(res1);
-   //             }else{
-   //                 imageButton1.setImageResource();
-   //             Toast.makeText(Game.this, "It works", Toast.LENGTH_SHORT).show();
-   //            }
-   //         }
-   //     });
-
-//        imageButton2.setOnClickListener(new View.OnClickListener() {
-//            boolean value2clicked = false;
-
-//            public void onClick(View v) {
-//                value2clicked = true;
-
-//                Toast.makeText(Game.this, "It works 2", Toast.LENGTH_SHORT).show();
-
-
-//            }
-
-//            public boolean getValue2clicked(){
-//
- //               return value2clicked;
-
-//            }
-//        });
-
-//        imageButton3.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                Toast.makeText(Game.this, "It works 3", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-
-    }
-    public static int randomDiceValue() {
-        return RANDOM.nextInt(6) + 1;
     }
 
+    @Override
+    public void onClick(View v) {
 
-
+    }
 }
