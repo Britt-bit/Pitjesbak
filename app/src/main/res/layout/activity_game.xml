@@ -21,8 +21,8 @@
         android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
         android:text="value1"
-        android:textColor="@color/colorAccent"
-        android:textSize="30sp" />
+        android:textColor="#FF0000FF"
+        android:textSize="30sp"/>
 
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="value2"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/black"
         android:textSize="30sp" />
 
 
@@ -114,7 +114,7 @@
             android:layout_height="100dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/dice_1" />
+            app:srcCompat="@drawable/dice_5" />
 
         <ImageButton
             android:id="@+id/button_1"
@@ -144,15 +144,29 @@
         android:textSize="20sp" />
 
 
-    <Button
-        android:id="@+id/finish"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+    <TextView
+        android:id="@+id/totalScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:text="Finish"
+        android:layout_marginBottom="15dp"
+        android:text="Score:"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/popUp"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_weight="2"
+        android:text=""
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:visibility="invisible"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
