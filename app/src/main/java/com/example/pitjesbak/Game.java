@@ -4,12 +4,18 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -18,14 +24,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import es.dmoral.toasty.Toasty;
+
 public class Game extends AppCompatActivity implements View.OnClickListener
 {
 
-    String one, two;
+    String one, two, OwnScore;
     TextView speler1;
     TextView speler2;
 
+
+
+
     TextView popUp;
+
+
 
 
     Button soixante_neuf;
@@ -44,7 +57,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener
 
     TextView scorePlayer1, scorePlayer2;
 
-    int score1 = 7, score2 = 7;
+    int score1 = 9, score2 = 9;
 
     TextView totalScore;
     int totalScorePlayer1 = 0, totalScorePlayer2 = 0;
@@ -73,6 +86,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener
         scorePlayer2 = findViewById(R.id.scorePlayer2);
         totalScore = findViewById(R.id.totalScore);
         popUp = findViewById(R.id.popUp);
+
+        rulesPop = findViewById(R.id.rulesPop);
+
 
 
 
@@ -126,7 +142,9 @@ value3 = 2;
                 list.add(60);
 
 
-
+                //button_0.setVisibility(View.VISIBLE);
+                //button_1.setVisibility(View.VISIBLE);
+                //button_2.setVisibility(View.VISIBLE);
 
                 //dobbel hulp buttons
 
@@ -171,8 +189,6 @@ value3 = 2;
                 zand.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-
 
                         int res1 = getResources().getIdentifier("dice_4", "drawable", "com.example.pitjesbak");
                         int res2 = getResources().getIdentifier("dice_4", "drawable", "com.example.pitjesbak");
@@ -232,7 +248,7 @@ value3 = 2;
                 counter++;
                 counterStops++;
 
-                    if (counter == 3 || stop1 && stop2 && stop3){
+                    if (counter == 3 || counter <= 3 && stop1 && stop2 && stop3){
                         stop1 = false;
                         stop2 = false;
                         stop3 = false;
@@ -249,13 +265,17 @@ value3 = 2;
                             uitkomst1som += uitkomst1.get(i);
                         }
 
+                        //button_0.setVisibility(View.INVISIBLE);
+                        //button_1.setVisibility(View.INVISIBLE);
+                        //button_2.setVisibility(View.INVISIBLE);
+
                         counter = 3;
 
                        Toast.makeText(getApplicationContext(), "punten " + uitkomst1som, Toast.LENGTH_SHORT).show();
                         speler1.setTextColor(Color.BLACK);
                         speler2.setTextColor(Color.BLUE);
 
-                    } else if (stop1 && stop2 && stop3 || counter == 6 || counter == 4 && counterStops == 2 || counter == 5 && counterStops == 4 ){
+                    } else if (counter >= 4 && stop1 && stop2 && stop3 || counter == 6 || counter == 4 && counterStops == 2 || counter == 5 && counterStops == 4 ){
                         counterStops = 0;
                         counter = 0;
 
@@ -270,6 +290,10 @@ value3 = 2;
                         uitkomst2.add(value2);
                         uitkomst2.add(value3);
 
+                        //button_0.setVisibility(View.INVISIBLE);
+                        //button_1.setVisibility(View.INVISIBLE);
+                        //button_2.setVisibility(View.INVISIBLE);
+
                         for (int i = 0; i < 3; i++){
                             uitkomst2som += uitkomst2.get(i);
                         }
@@ -278,9 +302,67 @@ value3 = 2;
                         speler2.setTextColor(Color.BLACK);
                         speler1.setTextColor(Color.BLUE);
 
+                        // alle mogelijke uitkomsten
 
-
-                       if (uitkomst1som < uitkomst2som) {
+                        if(uitkomst1som == 300 && score1 <= 8){
+                            score1 = 0;
+                            Toasty.info(getApplicationContext(), "You rolled 3 apen", Toast.LENGTH_SHORT).show();
+                            scorePlayer1.setText(String.valueOf(score1));
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+                        } else if ( uitkomst1som == 300 && score1 >= 9){
+                            score2 = 0;
+                            Toasty.info(getApplicationContext(), "You rolled 3 apen", Toast.LENGTH_SHORT).show();
+                            scorePlayer2.setText(String.valueOf(score2));
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+                        } else if(uitkomst2som == 300 && score2 <= 8){
+                            score2 = 0;
+                            Toasty.info(getApplicationContext(), "You rolled 3 apen", Toast.LENGTH_SHORT).show();
+                            scorePlayer2.setText(String.valueOf(score2));
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+                        } else if ( uitkomst2som == 300 && score2 >= 9) {
+                            score1 = 0;
+                            Toasty.info(getApplicationContext(), "You rolled 3 apen", Toast.LENGTH_SHORT).show();
+                            scorePlayer1.setText(String.valueOf(score1));
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+                        } else  if (uitkomst1som == 69){
+                            Toasty.info(getApplicationContext(), "You rolled a soixante-neuf", Toast.LENGTH_SHORT).show();
+                            score1 = score1 - 3;
+                            scorePlayer1.setText(String.valueOf(score1));
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+                        } else if (uitkomst2som == 69) {
+                            Toasty.info(getApplicationContext(), "You rolled a soixante-neuf", Toast.LENGTH_SHORT).show();
+                            score2 = score2 - 3;
+                            scorePlayer2.setText(String.valueOf(score2));
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+                        } else if (uitkomst1som == 7 || uitkomst2som == 7) {
+                            Toasty.info(getApplicationContext(), "You rolled a seven", Toast.LENGTH_SHORT).show();
+                            score1++;
+                            score2++;
+                            scorePlayer1.setText(String.valueOf(score1));
+                            scorePlayer2.setText(String.valueOf(score2));
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+                        } else if (uitkomst1som < uitkomst2som) {
                            score2--;
                            scorePlayer2.setText(String.valueOf(score2));
                            uitkomst1som = 0;
@@ -309,9 +391,8 @@ value3 = 2;
 
                 if (score1 == 0 || score1 < 0 ){
 
-                    Toast.makeText(getApplicationContext(), "speler 1 is gewonnen", Toast.LENGTH_SHORT).show();
-                    score1 = 7;
-                    score2 = 7;
+                    score1 = 9;
+                    score2 = 9;
                     scorePlayer1.setText(String.valueOf(score1));
                     scorePlayer2.setText(String.valueOf(score2));
 
@@ -333,9 +414,8 @@ value3 = 2;
 
                 } else if (score2 == 0 || score2 < 0){
 
-                    Toast.makeText(getApplicationContext(), "speler 2 is gewonnen", Toast.LENGTH_SHORT).show();
-                    score1 = 7;
-                    score2 = 7;
+                    score1 = 9;
+                    score2 = 9;
                     scorePlayer1.setText(String.valueOf(score1));
                     scorePlayer2.setText(String.valueOf(score2));
 
@@ -371,7 +451,6 @@ value3 = 2;
                 if (!stop1) {
                     stop1 = true;
                     hidden1.setVisibility(View.VISIBLE);
-                    Toast.makeText(getApplicationContext(), "stop 1", Toast.LENGTH_SHORT).show();
                 } else {
                     stop1 = false;
                     hidden1.setVisibility(View.INVISIBLE);
@@ -424,12 +503,59 @@ value3 = 2;
         speler2 = findViewById(R.id.speler2);
         one = getIntent().getExtras().getString("value1");
         two = getIntent().getExtras().getString("value2");
+       // OwnScore = getIntent().getExtras().getString("9");
 
         speler1.setText(one);
         speler2.setText(two);
+      //  scorePlayer1.setText(OwnScore);
+       // scorePlayer2.setText(OwnScore);
 
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mymenu, menu);
+
+        return true;
+    }
+
+
+    Intent shareIntent;
+    LinearLayout rulesPop;
+
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.share:
+                shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "My App");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "This pietjesbak App is amazing, you should really try it out. " + one + " played against " + two + " with a score of " + totalScorePlayer1 + " against " + totalScorePlayer2);
+                startActivity(Intent.createChooser(shareIntent, "Share via"));
+                return true;
+            case R.id.rules:
+                rulesPop.setVisibility(View.VISIBLE);
+                rollDices.setVisibility(View.INVISIBLE);
+                rulesPop.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view){
+                        rulesPop.setVisibility(view.INVISIBLE);
+                        rollDices.setVisibility(View.VISIBLE);
+                    }
+                });
+
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+        return false;
     }
 
     @Override

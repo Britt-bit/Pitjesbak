@@ -14,10 +14,12 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    String one, two;
+    String one, two, OwnScore;
 
     EditText player1;
     EditText player2;
+
+   // EditText number;
 
     Button submitButton;
 
@@ -26,15 +28,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        player1 = (EditText) findViewById(R.id.player1);
-        player2 = (EditText) findViewById(R.id.player2);
+        player1 = findViewById(R.id.player1);
+        player2 = findViewById(R.id.player2);
 
-        submitButton = (Button) findViewById(R.id.submitButton);
+       // number = findViewById(R.id.number);
+
+        submitButton = findViewById(R.id.submitButton);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 one = player1.getText().toString();
                 two = player2.getText().toString();
+               // OwnScore = number.getText().toString();
 
             }
         });
@@ -47,8 +52,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent activity_game = new Intent(MainActivity.this,Game.class);
                 one=player1.getText().toString();
                 two=player2.getText().toString();
+              //  OwnScore = number.getText().toString();
                 activity_game.putExtra("value1",one);
                 activity_game.putExtra("value2",two);
+              //  activity_game.putExtra("9",OwnScore);
                 startActivity(activity_game);
                 finish();
             }

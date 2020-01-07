@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="510dp"
-        android:text="7"
+        android:text="9"
         android:textSize="20sp"/>
 
     <TextView
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="75dp"
-        android:text="7"
+        android:text="9"
         android:textSize="20sp"/>
 
 
@@ -114,7 +114,8 @@
             android:layout_height="100dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/dice_5" />
+            app:srcCompat="@drawable/dice_5"
+            android:visibility="visible"/>
 
         <ImageButton
             android:id="@+id/button_1"
@@ -141,6 +142,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="60dp"
         android:text="Roll dice"
+        android:visibility="visible"
         android:textSize="20sp" />
 
 
@@ -168,6 +170,9 @@
         android:textSize="25sp"
         android:visibility="invisible"/>
 
+
+
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -180,7 +185,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3 apen"
-            android:textSize="10sp"/>
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/soixante_neuf"
@@ -200,9 +205,141 @@
             android:id="@+id/zeven"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Zeven"
+            android:text="zeven"
             android:textSize="10sp"/>
     </LinearLayout>
 
+
+    <LinearLayout
+        android:id="@+id/rulesPop"
+        android:background="@color/background"
+        android:layout_width="420dp"
+        android:layout_height="800dp"
+        android:visibility="invisible"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="spelregels"
+            android:paddingTop="10dp"
+            android:layout_gravity="center"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Nadat speler 1 heeft gegooid, moet speler 2 eerst 1 keer gooien om zijn beurt te beginnen. Omgekeert hetzelfde."
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/darkBlue"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="De eerste speler gooit 3 dobbelstenen. Na de eerste worp mag hij stoppen. De eerste speler mag vervolgens verder spelen met ofwel alle 3 de stenen ofwel met 1 of 2 van de stenen. De waarde van zijn laatste worp geldt. De andere spelers hebben slechts hetzelfde aantal pogingen als dat de beginner gooide. Dus de andere spelers hebben maximaal 3 pogingen. Wie de hoogste worp gegooid heeft mag 1, 2 of 3 punten aftrekken."
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="De waarde van 1 dobbelsteen: 1 oog = 100 punten, 6 ogen = 60 punten en 5, 4, 3, 2 ogen = 5, 4, 3, 2 punten"
+            android:textSize="12sp"
+            android:paddingTop="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Drie azen: 1, 1, 1"
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Als iemand 3 azen gooit, wint hij het spel op slag, dit op voorwaarde dat hij daarvoor al minstens 1 streepje uitgewist had. Zo niet is hij direct uitgeschakeld."
+            android:textSize="12sp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Soixante neuf: 6, 5, 4"
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="De winnaar mag 3 streepjes uitwissen"
+            android:textSize="12sp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Zand: driemaal dezelfde waarde 4, 4, 4"
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="De winnaar mag 2 streepjes uitwissen"
+            android:textSize="12sp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Zeven: 2, 2, 3"
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Alle spelers moeten een punt bijtellen."
+            android:textSize="12sp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Ex aequo: Er wordt nogmaal gegooid met 1 dobbelsteen - zes is dan de hoogste."
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+
+
+    </LinearLayout>
 
 </RelativeLayout>

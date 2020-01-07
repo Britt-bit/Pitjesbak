@@ -6,5 +6,6 @@
     <color name="darkBlue">#0000a5</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="background">#D6DBDF</color>
 
 </resources>
