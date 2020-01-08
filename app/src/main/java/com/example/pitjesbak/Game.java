@@ -54,6 +54,13 @@ public class Game extends AppCompatActivity implements View.OnClickListener
     int value2;
     int value3;
 
+    int value1_sp1;
+    int value2_sp1;
+    int value3_sp1;
+
+    int value1_sp2;
+    int value2_sp2;
+    int value3_sp2;
 
     TextView scorePlayer1, scorePlayer2;
 
@@ -261,6 +268,10 @@ value3 = 2;
                         uitkomst1.add(value2);
                         uitkomst1.add(value3);
 
+                        value1_sp1 = value1;
+                        value2_sp1 = value2;
+                        value3_sp1 = value3;
+
                         for (int i = 0; i < 3; i++){
                             uitkomst1som += uitkomst1.get(i);
                         }
@@ -289,6 +300,10 @@ value3 = 2;
                         uitkomst2.add(value1);
                         uitkomst2.add(value2);
                         uitkomst2.add(value3);
+
+                        value1_sp2 = value1;
+                        value2_sp2 = value2;
+                        value3_sp2 = value3;
 
                         //button_0.setVisibility(View.INVISIBLE);
                         //button_1.setVisibility(View.INVISIBLE);
@@ -352,6 +367,71 @@ value3 = 2;
                             uitkomst1.clear();
                             uitkomst2som = 0;
                             uitkomst2.clear();
+                        } else if (value1_sp1 == value2_sp1 && value2_sp1 == value3_sp1 && value1_sp1 == 5)  {
+                            Toasty.info(getApplicationContext(), "You rolled a zand with 5", Toast.LENGTH_SHORT).show();
+                            score1 = score1 - 2;
+                            scorePlayer1.setText(String.valueOf(score1));
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+                        } else if (value1_sp2 == value2_sp2 && value2_sp2 == value3_sp2 && value1_sp2 == 5)  {
+                            Toasty.info(getApplicationContext(), "You rolled a zand with 5", Toast.LENGTH_SHORT).show();
+                            score2 = score2 - 2;
+                            scorePlayer2.setText(String.valueOf(score2));
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+                        } else if (value1_sp1 == value2_sp1 && value2_sp1 == value3_sp1 && value1_sp1 == 4)  {
+                            Toasty.info(getApplicationContext(), "You rolled a zand with 4", Toast.LENGTH_SHORT).show();
+                            score1 = score1 - 2;
+                            scorePlayer1.setText(String.valueOf(score1));
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+                        } else if (value1_sp2 == value2_sp2 && value2_sp2 == value3_sp2 && value1_sp2 == 4)  {
+                            Toasty.info(getApplicationContext(), "You rolled a zand with 4", Toast.LENGTH_SHORT).show();
+                            score2 = score2 - 2;
+                            scorePlayer2.setText(String.valueOf(score2));
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+                        } else if (value1_sp1 == value2_sp1 && value2_sp1 == value3_sp1 && value1_sp1 == 3)  {
+                            Toasty.info(getApplicationContext(), "You rolled a zand with 3", Toast.LENGTH_SHORT).show();
+                            score1 = score1 - 2;
+                            scorePlayer1.setText(String.valueOf(score1));
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+                        } else if (value1_sp2 == value2_sp2 && value2_sp2 == value3_sp2 && value1_sp2 == 3)  {
+                            Toasty.info(getApplicationContext(), "You rolled a zand with 3", Toast.LENGTH_SHORT).show();
+                            score2 = score2 - 2;
+                            scorePlayer2.setText(String.valueOf(score2));
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+                        } else if (value1_sp1 == value2_sp1 && value2_sp1 == value3_sp1 && value1_sp1 == 2)  {
+                            Toasty.info(getApplicationContext(), "You rolled a zand with 2", Toast.LENGTH_SHORT).show();
+                            score1 = score1 - 2;
+                            scorePlayer1.setText(String.valueOf(score1));
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+                        } else if (value1_sp2 == value2_sp2 && value2_sp2 == value3_sp2 && value1_sp2 == 2)  {
+                            Toasty.info(getApplicationContext(), "You rolled a zand with 2", Toast.LENGTH_SHORT).show();
+                            score2 = score2 - 2;
+                            scorePlayer2.setText(String.valueOf(score2));
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+
                         } else if (uitkomst1som == 7 || uitkomst2som == 7) {
                             Toasty.info(getApplicationContext(), "You rolled a seven", Toast.LENGTH_SHORT).show();
                             score1++;
@@ -378,13 +458,6 @@ value3 = 2;
                            uitkomst2som = 0;
                            uitkomst2.clear();
 
-                       } else {
-                           Toast.makeText(getApplicationContext(), "It's a draw", Toast.LENGTH_SHORT).show();
-
-                           uitkomst1som = 0;
-                           uitkomst1.clear();
-                           uitkomst2som = 0;
-                           uitkomst2.clear();
                        }
                     }
 
@@ -539,6 +612,7 @@ value3 = 2;
                 shareIntent.putExtra(Intent.EXTRA_TEXT, "This pietjesbak App is amazing, you should really try it out. " + one + " played against " + two + " with a score of " + totalScorePlayer1 + " against " + totalScorePlayer2);
                 startActivity(Intent.createChooser(shareIntent, "Share via"));
                 return true;
+
             case R.id.rules:
                 rulesPop.setVisibility(View.VISIBLE);
                 rollDices.setVisibility(View.INVISIBLE);
@@ -549,8 +623,15 @@ value3 = 2;
                         rollDices.setVisibility(View.VISIBLE);
                     }
                 });
-
                 break;
+
+            case R.id.restart:
+                Intent activity_main = new Intent(Game.this,MainActivity.class);
+
+                startActivity(activity_main);
+                finish();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
 

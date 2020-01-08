@@ -11,4 +11,9 @@
         android:title="Rules"
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/restart"
+        android:title="Restart game"
+        app:showAsAction="never"/>
+
 </menu>
