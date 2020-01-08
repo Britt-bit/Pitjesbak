@@ -14,51 +14,68 @@
         android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/pitjesbak" />
 
-    <TextView
-        android:id="@+id/speler1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_centerHorizontal="true"
-        android:text="value1"
-        android:textColor="#FF0000FF"
-        android:textSize="30sp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/relativeLayout">
+
+        <TextView
+            android:id="@+id/speler1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingLeft="10dp"
+            android:text="value1"
+            android:textColor="#FF0000FF"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/scorePlayer1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingLeft="30dp"
+            android:text="9"
+            android:textSize="20sp"/>
 
 
-    <TextView
-        android:id="@+id/speler2"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginBottom="120dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="value2"
-        android:textColor="@color/black"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/speler2"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:text="value2"
+            android:paddingRight="10dp"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+
+        <TextView
+            android:id="@+id/scorePlayer2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:paddingRight="30dp"
+            android:layout_marginTop="40dp"
+            android:text="9"
+            android:textSize="20sp"/>
 
 
 
 
-    <TextView
-        android:id="@+id/scorePlayer2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="510dp"
-        android:text="9"
-        android:textSize="20sp"/>
-
-    <TextView
-        android:id="@+id/scorePlayer1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="75dp"
-        android:text="9"
-        android:textSize="20sp"/>
-
-
-
+    </RelativeLayout>
 
 
     <LinearLayout
@@ -66,7 +83,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="73dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
@@ -74,6 +91,7 @@
             android:id="@+id/hidden1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="Clicked"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="0dp"
@@ -83,6 +101,7 @@
             android:id="@+id/hidden2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="Clicked"
             android:layout_marginBottom="0dp"
             android:visibility="invisible"/>
@@ -91,6 +110,7 @@
             android:id="@+id/hidden3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="Clicked"
             android:layout_marginLeft="60dp"
             android:layout_marginBottom="0dp"
@@ -151,7 +171,7 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="25dp"
         android:text="Roll dice"
         android:visibility="visible"
         android:textSize="20sp" />
@@ -174,14 +194,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
+        android:textColor="@color/black"
         android:text="Score:"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/popUp"
-        android:layout_width="300dp"
-        android:layout_height="400dp"
+        android:layout_width="400dp"
+        android:layout_height="250dp"
         android:layout_weight="2"
         android:text=""
         android:layout_centerHorizontal="true"
@@ -198,9 +218,10 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true">
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:gravity="right"
+        android:layout_marginLeft="620dp">
 
         <Button
             android:id="@+id/apen"
@@ -235,8 +256,8 @@
     <LinearLayout
         android:id="@+id/rulesPop"
         android:background="@color/background"
-        android:layout_width="420dp"
-        android:layout_height="800dp"
+        android:layout_width="730dp"
+        android:layout_height="420dp"
         android:visibility="invisible"
         android:orientation="vertical">
 
@@ -253,7 +274,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="Nadat speler 1 heeft gegooid, moet speler 2 eerst 1 keer gooien om zijn beurt te beginnen. Omgekeert hetzelfde."
-            android:textSize="15sp"
+            android:textSize="13.5sp"
             android:paddingTop="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -276,7 +297,8 @@
             android:textSize="12sp"
             android:paddingTop="15dp"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp"
+            android:layout_gravity="center"/>
 
         <TextView
             android:layout_height="wrap_content"
@@ -294,7 +316,8 @@
             android:text="Als iemand 3 azen gooit, wint hij het spel op slag, dit op voorwaarde dat hij daarvoor al minstens 1 streepje uitgewist had. Zo niet is hij direct uitgeschakeld."
             android:textSize="12sp"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
+            android:paddingRight="10dp"
+            android:layout_gravity="center"/>
 
         <TextView
             android:layout_height="wrap_content"
@@ -305,14 +328,13 @@
             android:textStyle="bold"
             android:paddingTop="10dp"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp" />
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="De winnaar mag 3 streepjes uitwissen"
             android:textSize="12sp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:layout_gravity="center"/>
 
         <TextView
             android:layout_height="wrap_content"
@@ -321,16 +343,13 @@
             android:layout_gravity="center"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:paddingTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingTop="10dp" />
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="De winnaar mag 2 streepjes uitwissen"
             android:textSize="12sp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:layout_gravity="center"/>
 
         <TextView
             android:layout_height="wrap_content"
@@ -339,16 +358,13 @@
             android:layout_gravity="center"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:paddingTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingTop="10dp" />
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="Alle spelers moeten een punt bijtellen."
             android:textSize="12sp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:layout_gravity="center"/>
 
         <TextView
             android:layout_height="wrap_content"
@@ -357,9 +373,7 @@
             android:layout_gravity="center"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:paddingTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingTop="10dp" />
 
 
     </LinearLayout>

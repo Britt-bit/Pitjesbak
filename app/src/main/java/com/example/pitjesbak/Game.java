@@ -34,11 +34,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener
     TextView speler2;
 
 
-
-
     TextView popUp;
-
-
 
 
     Button soixante_neuf;
@@ -53,6 +49,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener
     int value1;
     int value2;
     int value3;
+    int value4;
+    int value5;
 
     int value1_sp1;
     int value2_sp1;
@@ -79,9 +77,11 @@ public class Game extends AppCompatActivity implements View.OnClickListener
 
 
     private Button rollDices;
+    private Button drawButton;
     int counter = 0;
     int counterStops = 0;
-    private ImageView button_0, button_1, button_2;
+    int counterDraw = 0;
+    private ImageView button_0, button_1, button_2, button_4;
     TextView hidden1, hidden2, hidden3;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -93,10 +93,11 @@ public class Game extends AppCompatActivity implements View.OnClickListener
         scorePlayer2 = findViewById(R.id.scorePlayer2);
         totalScore = findViewById(R.id.totalScore);
         popUp = findViewById(R.id.popUp);
+        drawButton = findViewById(R.id.drawButton);
 
         rulesPop = findViewById(R.id.rulesPop);
 
-
+        button_4 = (ImageButton) findViewById(R.id.button_4);
 
 
         rollDices = findViewById(R.id.rollDices);
@@ -115,27 +116,18 @@ public class Game extends AppCompatActivity implements View.OnClickListener
 
         Toast.makeText(getApplicationContext(), "speler 1 is aan de beurt", Toast.LENGTH_SHORT).show();
 
-
-
-value1 = 5;
-value2 = 4;
-value3 = 2;
-
-
-
-
-
-
-
-
+    value1 = 5;
+    value2 = 4;
+    value3 = 2;
 
 
         rollDices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
+                button_4.setVisibility(View.INVISIBLE);
+                button_0.setVisibility(View.VISIBLE);
+                button_1.setVisibility(View.VISIBLE);
+                button_2.setVisibility(View.VISIBLE);
 
 
 
@@ -319,7 +311,74 @@ value3 = 2;
 
                         // alle mogelijke uitkomsten
 
-                        if(uitkomst1som == 300 && score1 <= 8){
+
+                        if (uitkomst1som == uitkomst2som) {
+                            button_0.setVisibility(View.INVISIBLE);
+                            button_1.setVisibility(View.INVISIBLE);
+                            button_2.setVisibility(View.INVISIBLE);
+                            button_4.setVisibility(View.VISIBLE);
+                            drawButton.setVisibility(View.VISIBLE);
+                            rollDices.setVisibility(View.INVISIBLE);
+
+
+
+                            drawButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    List<Integer> listDraw = new ArrayList<>();
+
+                                    listDraw.add(1);
+                                    listDraw.add(2);
+                                    listDraw.add(3);
+                                    listDraw.add(4);
+                                    listDraw.add(5);
+                                    listDraw.add(6);
+
+                                    counterDraw ++;
+
+                                    if (counterDraw == 1) {
+                                        value4 = randomDiceValue(listDraw);
+                                        int res4 = getResources().getIdentifier("dice_" + value4, "drawable", "com.example.pitjesbak");
+                                        button_4.setImageResource(res4);
+
+                                        speler1.setTextColor(Color.BLACK);
+                                        speler2.setTextColor(Color.BLUE);
+
+                                        counterDraw ++;
+
+                                    } else if (counterDraw >= 2) {
+                                        value5 = randomDiceValue(listDraw);
+                                        int res5 = getResources().getIdentifier("dice_" + value5, "drawable", "com.example.pitjesbak");
+                                        button_4.setImageResource(res5);
+
+                                        speler1.setTextColor(Color.BLUE);
+                                        speler2.setTextColor(Color.BLACK);
+
+                                        if (value4 < value5){
+                                            score2 --;
+                                            Toasty.info(getApplicationContext(), "You rolled a draw player 2 won", Toast.LENGTH_SHORT).show();
+                                            scorePlayer2.setText(String.valueOf(score2));
+                                            drawButton.setVisibility(View.INVISIBLE);
+                                            rollDices.setVisibility(View.VISIBLE);
+                                        } else{
+                                            score1 --;
+                                            Toasty.info(getApplicationContext(), "You rolled a draw player 1 won", Toast.LENGTH_SHORT).show();
+                                            scorePlayer1.setText(String.valueOf(score1));
+                                            drawButton.setVisibility(View.INVISIBLE);
+                                            rollDices.setVisibility(View.VISIBLE);
+                                        }
+                                        counterDraw = 0;
+                                    }
+                                }
+                            });
+
+                            counterDraw = 0;
+                            uitkomst1som = 0;
+                            uitkomst1.clear();
+                            uitkomst2som = 0;
+                            uitkomst2.clear();
+
+                        } else if(uitkomst1som == 300 && score1 <= 8){
                             score1 = 0;
                             Toasty.info(getApplicationContext(), "You rolled 3 apen", Toast.LENGTH_SHORT).show();
                             scorePlayer1.setText(String.valueOf(score1));
