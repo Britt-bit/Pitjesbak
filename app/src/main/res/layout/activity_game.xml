@@ -156,16 +156,17 @@
         android:visibility="visible"
         android:textSize="20sp" />
 
-    <Button
+    <TextView
         android:id="@+id/drawButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="60dp"
-        android:text="Roll dice"
+        android:text="Shake to roll"
         android:visibility="invisible"
-        android:textSize="20sp" />
+        android:gravity="center"
+        android:textSize="25sp" />
 
 
     <TextView

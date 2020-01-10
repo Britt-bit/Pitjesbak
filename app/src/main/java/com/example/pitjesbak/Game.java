@@ -4,8 +4,11 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,7 +18,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -28,6 +30,12 @@ import es.dmoral.toasty.Toasty;
 
 public class Game extends AppCompatActivity implements View.OnClickListener
 {
+
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private ShakeDetector mShakeDetecor;
+
+
 
     String one, two, OwnScore;
     TextView speler1;
@@ -77,7 +85,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener
 
 
     private Button rollDices;
-    private Button drawButton;
+    private TextView drawButton;
     int counter = 0;
     int counterStops = 0;
     int counterDraw = 0;
@@ -89,6 +97,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
         scorePlayer1 = findViewById(R.id.scorePlayer1);
         scorePlayer2 = findViewById(R.id.scorePlayer2);
         totalScore = findViewById(R.id.totalScore);
@@ -96,29 +105,33 @@ public class Game extends AppCompatActivity implements View.OnClickListener
         drawButton = findViewById(R.id.drawButton);
 
         rulesPop = findViewById(R.id.rulesPop);
-
         button_4 = (ImageButton) findViewById(R.id.button_4);
 
-
         rollDices = findViewById(R.id.rollDices);
-            button_0 = (ImageButton) findViewById(R.id.button_0);
-            button_0.setOnClickListener(this);
-            button_1 = (ImageButton) findViewById(R.id.button_1);
-            button_1.setOnClickListener(this);
-            button_2 = (ImageButton) findViewById(R.id.button_2);
-            button_2.setOnClickListener(this);
+        button_0 = (ImageButton) findViewById(R.id.button_0);
+        button_0.setOnClickListener(this);
+        button_1 = (ImageButton) findViewById(R.id.button_1);
+        button_1.setOnClickListener(this);
+        button_2 = (ImageButton) findViewById(R.id.button_2);
+        button_2.setOnClickListener(this);
 
-            hidden1 =  findViewById(R.id.hidden1);
-            hidden2 = findViewById(R.id.hidden2);
-            hidden3 = findViewById(R.id.hidden3);
-        //array van maken?
+        hidden1 =  findViewById(R.id.hidden1);
+        hidden2 = findViewById(R.id.hidden2);
+        hidden3 = findViewById(R.id.hidden3);
+
+
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetecor = new ShakeDetector();
+
 
 
         Toast.makeText(getApplicationContext(), "speler 1 is aan de beurt", Toast.LENGTH_SHORT).show();
 
-    value1 = 5;
-    value2 = 4;
-    value3 = 2;
+        value1 = 5;
+        value2 = 4;
+        value3 = 2;
 
 
         rollDices.setOnClickListener(new View.OnClickListener() {
@@ -322,9 +335,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener
 
 
 
-                            drawButton.setOnClickListener(new View.OnClickListener() {
+                            mShakeDetecor.setOnShakeListener(new ShakeDetector.OnShakeListener() {
                                 @Override
-                                public void onClick(View view) {
+                                public void onShake(int count) {
                                     List<Integer> listDraw = new ArrayList<>();
 
                                     listDraw.add(1);
@@ -370,7 +383,16 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                                         counterDraw = 0;
                                     }
                                 }
+
                             });
+
+
+
+             //               drawButton.setOnClickListener(new View.OnClickListener() {
+             //                   @Override
+             //                   public void onClick(View view) {
+             //                   }
+             //               });
 
                             counterDraw = 0;
                             uitkomst1som = 0;
@@ -627,8 +649,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
 
 
 
-
-
         //get text from main to here
 
         speler1 = findViewById(R.id.speler1);
@@ -647,6 +667,20 @@ public class Game extends AppCompatActivity implements View.OnClickListener
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        mSensorManager.registerListener(mShakeDetecor, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    public void onPause(){
+        mSensorManager.unregisterListener(mShakeDetecor);
+        super.onPause();
+    }
+
+
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.mymenu, menu);
@@ -657,9 +691,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
 
     Intent shareIntent;
     LinearLayout rulesPop;
-
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
