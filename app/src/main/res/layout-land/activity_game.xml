@@ -44,8 +44,8 @@
             android:layout_alignParentStart="true"
             android:paddingLeft="30dp"
             android:text="9"
-            android:textSize="20sp"/>
-
+            android:textSize="20sp"
+            android:saveEnabled="true"/>
 
         <TextView
             android:id="@+id/speler2"
@@ -59,7 +59,6 @@
             android:textColor="@color/black"
             android:textSize="30sp" />
 
-
         <TextView
             android:id="@+id/scorePlayer2"
             android:layout_width="wrap_content"
@@ -70,10 +69,8 @@
             android:paddingRight="30dp"
             android:layout_marginTop="40dp"
             android:text="9"
-            android:textSize="20sp"/>
-
-
-
+            android:textSize="20sp"
+            android:saveEnabled="true"/>
 
     </RelativeLayout>
 
@@ -95,7 +92,8 @@
             android:text="Clicked"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="0dp"
-            android:visibility="invisible"/>
+            android:visibility="invisible"
+            android:saveEnabled="true"/>
 
         <TextView
             android:id="@+id/hidden2"
@@ -104,7 +102,8 @@
             android:textColor="@color/black"
             android:text="Clicked"
             android:layout_marginBottom="0dp"
-            android:visibility="invisible"/>
+            android:visibility="invisible"
+            android:saveEnabled="true"/>
 
         <TextView
             android:id="@+id/hidden3"
@@ -114,8 +113,8 @@
             android:text="Clicked"
             android:layout_marginLeft="60dp"
             android:layout_marginBottom="0dp"
-            android:visibility="invisible"/>
-
+            android:visibility="invisible"
+            android:saveEnabled="true"/>
     </LinearLayout>
 
     <LinearLayout
@@ -127,7 +126,6 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
-
         <ImageButton
             android:id="@+id/button_0"
             android:layout_width="100dp"
@@ -135,7 +133,8 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/dice_5"
-            android:visibility="visible"/>
+            android:visibility="visible"
+            android:saveEnabled="true"/>
 
         <ImageButton
             android:id="@+id/button_1"
@@ -143,15 +142,16 @@
             android:layout_height="100dp"
             android:layout_marginRight="10dp"
             app:srcCompat="@drawable/dice_4"
-            android:visibility="visible"/>
+            android:visibility="visible"
+            android:saveEnabled="true"/>
 
         <ImageButton
             android:id="@+id/button_2"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:srcCompat="@drawable/dice_3"
-            android:visibility="visible"/>
-
+            android:visibility="visible"
+            android:saveEnabled="true"/>
 
     </LinearLayout>
 
@@ -162,8 +162,8 @@
         app:srcCompat="@drawable/dice_3"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:visibility="invisible"/>
-
+        android:visibility="invisible"
+        android:saveEnabled="true"/>
 
     <Button
         android:id="@+id/rollDices"
@@ -182,12 +182,12 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="30dp"
         android:text="Shake to roll"
         android:visibility="invisible"
         android:gravity="center"
-        android:textSize="25sp" />
-
+        android:textSize="25sp"
+        android:saveEnabled="true"/>
 
     <TextView
         android:id="@+id/totalScore"
@@ -197,7 +197,8 @@
         android:layout_centerHorizontal="true"
         android:textColor="@color/black"
         android:text="Score:"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:saveEnabled="true"/>
 
     <TextView
         android:id="@+id/popUp"
@@ -211,9 +212,8 @@
         android:gravity="center"
         android:textAlignment="center"
         android:textSize="25sp"
-        android:visibility="invisible"/>
-
-
+        android:visibility="invisible"
+        android:saveEnabled="true"/>
 
 
     <LinearLayout
@@ -260,7 +260,8 @@
         android:layout_width="730dp"
         android:layout_height="420dp"
         android:visibility="invisible"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:saveEnabled="true">
 
         <TextView
             android:layout_height="wrap_content"
@@ -311,6 +312,7 @@
             android:paddingTop="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"/>
+
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -330,6 +332,7 @@
             android:paddingTop="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp" />
+
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -345,6 +348,7 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:paddingTop="10dp" />
+
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -360,6 +364,7 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:paddingTop="10dp" />
+
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -375,7 +380,6 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:paddingTop="10dp" />
-
 
     </LinearLayout>
 

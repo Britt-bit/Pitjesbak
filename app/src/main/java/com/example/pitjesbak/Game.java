@@ -3,7 +3,6 @@ package com.example.pitjesbak;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -30,20 +29,43 @@ import es.dmoral.toasty.Toasty;
 
 public class Game extends AppCompatActivity implements View.OnClickListener
 {
-
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private ShakeDetector mShakeDetecor;
 
-
-
-    String one, two, OwnScore;
+    String one, two;
     TextView speler1;
     TextView speler2;
 
+    int value1;
+    int value2;
+    int value3;
+    int value4;
+    int value5;
+
+    TextView scorePlayer1, scorePlayer2;
+    int score1 = 9, score2 = 9;
+    TextView totalScore;
+    int totalScorePlayer1 = 0, totalScorePlayer2 = 0;
+
+    int value1_sp1;
+    int value2_sp1;
+    int value3_sp1;
+
+    int value1_sp2;
+    int value2_sp2;
+    int value3_sp2;
+
+    private Button rollDices;
+    private TextView drawButton;
+
+    private ImageView button_0, button_1, button_2, button_4;
+    int uitkomst1som = 0;
+    int uitkomst2som = 0;
+    ArrayList<Integer> uitkomst1 = new ArrayList<>();
+    ArrayList<Integer> uitkomst2 = new ArrayList<>();
 
     TextView popUp;
-
 
     Button soixante_neuf;
     Button apen;
@@ -54,43 +76,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener
     boolean stop2;
     boolean stop3;
 
-    int value1;
-    int value2;
-    int value3;
-    int value4;
-    int value5;
+    TextView hidden1, hidden2, hidden3;
 
-    int value1_sp1;
-    int value2_sp1;
-    int value3_sp1;
-
-    int value1_sp2;
-    int value2_sp2;
-    int value3_sp2;
-
-    TextView scorePlayer1, scorePlayer2;
-
-    int score1 = 9, score2 = 9;
-
-    TextView totalScore;
-    int totalScorePlayer1 = 0, totalScorePlayer2 = 0;
-
-
-
-    ArrayList<Integer> uitkomst1 = new ArrayList<>();
-    ArrayList<Integer> uitkomst2 = new ArrayList<>();
-
-    int uitkomst1som = 0;
-    int uitkomst2som = 0;
-
-
-    private Button rollDices;
-    private TextView drawButton;
     int counter = 0;
     int counterStops = 0;
     int counterDraw = 0;
-    private ImageView button_0, button_1, button_2, button_4;
-    TextView hidden1, hidden2, hidden3;
+
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -104,9 +95,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
         popUp = findViewById(R.id.popUp);
         drawButton = findViewById(R.id.drawButton);
 
-        rulesPop = findViewById(R.id.rulesPop);
-        button_4 = (ImageButton) findViewById(R.id.button_4);
-
         rollDices = findViewById(R.id.rollDices);
         button_0 = (ImageButton) findViewById(R.id.button_0);
         button_0.setOnClickListener(this);
@@ -114,16 +102,18 @@ public class Game extends AppCompatActivity implements View.OnClickListener
         button_1.setOnClickListener(this);
         button_2 = (ImageButton) findViewById(R.id.button_2);
         button_2.setOnClickListener(this);
+        button_4 = (ImageButton) findViewById(R.id.button_4);
 
         hidden1 =  findViewById(R.id.hidden1);
         hidden2 = findViewById(R.id.hidden2);
         hidden3 = findViewById(R.id.hidden3);
 
-
+        rulesPop = findViewById(R.id.rulesPop);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mShakeDetecor = new ShakeDetector();
+
 
 
 
@@ -133,7 +123,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
         value2 = 4;
         value3 = 2;
 
-
         rollDices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,8 +130,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                 button_0.setVisibility(View.VISIBLE);
                 button_1.setVisibility(View.VISIBLE);
                 button_2.setVisibility(View.VISIBLE);
-
-
 
                 List<Integer> list = new ArrayList<>();
 
@@ -153,19 +140,11 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                 list.add(5);
                 list.add(60);
 
-
-                //button_0.setVisibility(View.VISIBLE);
-                //button_1.setVisibility(View.VISIBLE);
-                //button_2.setVisibility(View.VISIBLE);
-
                 //dobbel hulp buttons
-
                 soixante_neuf = findViewById(R.id.soixante_neuf);
                 soixante_neuf.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-
                         int res1 = getResources().getIdentifier("dice_60", "drawable", "com.example.pitjesbak");
                         int res2 = getResources().getIdentifier("dice_5", "drawable", "com.example.pitjesbak");
                         int res3 = getResources().getIdentifier("dice_4", "drawable", "com.example.pitjesbak");
@@ -183,7 +162,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                 apen.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         int res1 = getResources().getIdentifier("dice_100", "drawable", "com.example.pitjesbak");
                         int res2 = getResources().getIdentifier("dice_100", "drawable", "com.example.pitjesbak");
                         int res3 = getResources().getIdentifier("dice_100", "drawable", "com.example.pitjesbak");
@@ -201,7 +179,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                 zand.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         int res1 = getResources().getIdentifier("dice_4", "drawable", "com.example.pitjesbak");
                         int res2 = getResources().getIdentifier("dice_4", "drawable", "com.example.pitjesbak");
                         int res3 = getResources().getIdentifier("dice_4", "drawable", "com.example.pitjesbak");
@@ -211,7 +188,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                         value1 = 4;
                         value2 = 4;
                         value3 = 4;
-
                     }
                 });
 
@@ -220,7 +196,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                 zeven.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         int res1 = getResources().getIdentifier("dice_2", "drawable", "com.example.pitjesbak");
                         int res2 = getResources().getIdentifier("dice_2", "drawable", "com.example.pitjesbak");
                         int res3 = getResources().getIdentifier("dice_3", "drawable", "com.example.pitjesbak");
@@ -232,9 +207,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                         value3 = 3;
                     }
                 });
-
-
-
 
 
                     if (!stop1) {
@@ -310,9 +282,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                         value2_sp2 = value2;
                         value3_sp2 = value3;
 
-                        //button_0.setVisibility(View.INVISIBLE);
-                        //button_1.setVisibility(View.INVISIBLE);
-                        //button_2.setVisibility(View.INVISIBLE);
 
                         for (int i = 0; i < 3; i++){
                             uitkomst2som += uitkomst2.get(i);
@@ -322,9 +291,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                         speler2.setTextColor(Color.BLACK);
                         speler1.setTextColor(Color.BLUE);
 
+
                         // alle mogelijke uitkomsten
-
-
                         if (uitkomst1som == uitkomst2som) {
                             button_0.setVisibility(View.INVISIBLE);
                             button_1.setVisibility(View.INVISIBLE);
@@ -332,7 +300,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                             button_4.setVisibility(View.VISIBLE);
                             drawButton.setVisibility(View.VISIBLE);
                             rollDices.setVisibility(View.INVISIBLE);
-
 
 
                             mShakeDetecor.setOnShakeListener(new ShakeDetector.OnShakeListener() {
@@ -383,16 +350,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                                         counterDraw = 0;
                                     }
                                 }
-
                             });
-
-
-
-             //               drawButton.setOnClickListener(new View.OnClickListener() {
-             //                   @Override
-             //                   public void onClick(View view) {
-             //                   }
-             //               });
 
                             counterDraw = 0;
                             uitkomst1som = 0;
@@ -408,7 +366,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                             uitkomst1.clear();
                             uitkomst2som = 0;
                             uitkomst2.clear();
-                        } else if ( uitkomst1som == 300 && score1 >= 9){
+                        } else if ( uitkomst1som == 300){
                             score2 = 0;
                             Toasty.info(getApplicationContext(), "You rolled 3 apen", Toast.LENGTH_SHORT).show();
                             scorePlayer2.setText(String.valueOf(score2));
@@ -424,7 +382,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                             uitkomst1.clear();
                             uitkomst2som = 0;
                             uitkomst2.clear();
-                        } else if ( uitkomst2som == 300 && score2 >= 9) {
+                        } else if ( uitkomst2som == 300) {
                             score1 = 0;
                             Toasty.info(getApplicationContext(), "You rolled 3 apen", Toast.LENGTH_SHORT).show();
                             scorePlayer1.setText(String.valueOf(score1));
@@ -512,7 +470,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                             uitkomst1.clear();
                             uitkomst2som = 0;
                             uitkomst2.clear();
-
                         } else if (uitkomst1som == 7 || uitkomst2som == 7) {
                             Toasty.info(getApplicationContext(), "You rolled a seven", Toast.LENGTH_SHORT).show();
                             score1++;
@@ -530,7 +487,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                            uitkomst1.clear();
                            uitkomst2som = 0;
                            uitkomst2.clear();
-
                        } else if (uitkomst1som > uitkomst2som) {
                            score1--;
                            scorePlayer1.setText(String.valueOf(score1));
@@ -538,13 +494,11 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                            uitkomst1.clear();
                            uitkomst2som = 0;
                            uitkomst2.clear();
-
                        }
                     }
 
 
                 if (score1 == 0 || score1 < 0 ){
-
                     score1 = 9;
                     score2 = 9;
                     scorePlayer1.setText(String.valueOf(score1));
@@ -564,10 +518,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                         }
                     });
 
-
-
                 } else if (score2 == 0 || score2 < 0){
-
                     score1 = 9;
                     score2 = 9;
                     scorePlayer1.setText(String.valueOf(score1));
@@ -587,10 +538,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                         }
                     });
                 }
-
             }
 
-            public int randomDiceValue(List<Integer> list){
+            private int randomDiceValue(List<Integer> list){
                 Random rand = new Random();
                 return list.get(rand.nextInt(list.size()));
             }
@@ -598,7 +548,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
 
 
         //stop button met rolling
-
         button_0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -612,8 +561,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
             }
         });
 
-
-
         button_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -624,10 +571,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                     stop2 = false;
                     hidden2.setVisibility(View.INVISIBLE);
                 }
-
             }
         });
-
 
         button_2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -635,18 +580,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                 if (!stop3) {
                     stop3 = true;
                     hidden3.setVisibility(View.VISIBLE);
-
                 } else {
                     stop3 = false;
                     hidden3.setVisibility(View.INVISIBLE);
-
                 }
             }
         });
-
-
-
-
 
 
         //get text from main to here
@@ -655,15 +594,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener
         speler2 = findViewById(R.id.speler2);
         one = getIntent().getExtras().getString("value1");
         two = getIntent().getExtras().getString("value2");
-       // OwnScore = getIntent().getExtras().getString("9");
 
         speler1.setText(one);
         speler2.setText(two);
-      //  scorePlayer1.setText(OwnScore);
-       // scorePlayer2.setText(OwnScore);
-
-
-
     }
 
     @Override
@@ -679,15 +612,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.mymenu, menu);
-
         return true;
     }
-
 
     Intent shareIntent;
     LinearLayout rulesPop;
@@ -702,7 +632,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener
                 shareIntent.putExtra(Intent.EXTRA_TEXT, "This pietjesbak App is amazing, you should really try it out. " + one + " played against " + two + " with a score of " + totalScorePlayer1 + " against " + totalScorePlayer2);
                 startActivity(Intent.createChooser(shareIntent, "Share via"));
                 return true;
-
             case R.id.rules:
                 rulesPop.setVisibility(View.VISIBLE);
                 rollDices.setVisibility(View.INVISIBLE);
@@ -717,14 +646,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener
 
             case R.id.restart:
                 Intent activity_main = new Intent(Game.this,MainActivity.class);
-
                 startActivity(activity_main);
                 finish();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
-
         }
         return false;
     }
